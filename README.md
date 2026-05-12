@@ -17,3 +17,13 @@ also change .git/config section [core] to look like this:
 	logallrefupdates = true
 	sshCommand = ssh -i ~/dawson/.ssh/id_rsa
 
+## Get wokwi to work with this project
+add wokwi.toml file in the root of the project:
+[wokwi]
+version = 1
+firmware = '.pio/build/nanoatmega328/firmware.hex'
+elf ='.pio/build/nanoatmega328/firmware.elf'
+
+copy the firmware.elf and firmware.hex from another project .. I'm not quite sure where I got them from to begin with in my binaryClock project
+
+Then build a circuit in wokwi and copy it so that you can import the diagram.json file into the root ... of the project
