@@ -7,3 +7,13 @@ git config user.email abu.exegesis@gmail.com
 
 change the remote repo from https to ssh
 git remote set-url origin git@github.com:abuexegesis/analogButtons.git
+
+also change .git/config section [core] to look like this:
+
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	sshCommand = ssh -i ~/dawson/.ssh/id_rsa
+
