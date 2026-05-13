@@ -12,56 +12,29 @@ unsigned long before; // previous time millis() was called
 bool newLoopTime = 0;
 static const uint8_t buttons[] = {A0,A1,A2,A3,A4}; 
 
-// need to refactor all of this testing stuff
-void button1Pressed(){
-  Serial.println("Button one pressed!");
-}
-void button2Pressed(){
-  Serial.println("Button two pressed!");
-}
-void button3Pressed(){
-  Serial.println("Button three pressed!");
-}
-void button4Pressed(){
-  Serial.println("Button four pressed!");
+void buttonPressed(int button){
+  String number = String(button+1);
+  String message = "Button " + number + " pressed!";
+  Serial.println(message);
 }
 
-void checkButton1() {
-  if (analogRead(A0) < LOW_TRIGGER) button1Pressed(); 
-}
-
-void checkButton2() {
-  if (analogRead(A1) < LOW_TRIGGER) button2Pressed(); 
-}
-
-void checkButton3() {
-  if (analogRead(A2) < LOW_TRIGGER) button3Pressed(); 
-}
-
-void checkButton4() {
-  if (analogRead(A3) < LOW_TRIGGER) button4Pressed(); 
+void checkButton(int buttonNumber) {
+  if (analogRead(buttons[buttonNumber]) < LOW_TRIGGER) buttonPressed(buttonNumber); 
 }
 
 void checkButtons() {
-  checkButton1();
-  checkButton2();
-  checkButton3();
-  checkButton4();
+  for (int i=0; i<5; i++) {
+    checkButton(i);
+  }
+  
 }
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(115200); // Any baud rate should work
-  // Serial.println("Hello Arduino\n");
 
   for (int i=0; i<5; i++){
     pinMode(buttons[i], INPUT_PULLUP);
   }
-  /* pinMode(A0, INPUT_PULLUP);
-  pinMode(A1, INPUT_PULLUP);
-  pinMode(A2, INPUT_PULLUP);
-  pinMode(A3, INPUT_PULLUP);
-  */
 
   Serial.println("Start up!");
   before = millis();
