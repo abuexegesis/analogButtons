@@ -10,7 +10,7 @@ const unsigned long loop_time = 500;  // interval at which to poll
 unsigned long now; // where to put the current value of millis()
 unsigned long before; // previous time millis() was called
 bool newLoopTime = 0;
-String buttons[4] {"A0", "A1", "A2", "A3"}; 
+static const uint8_t buttons[] = {A0,A1,A2,A3,A4}; 
 
 // need to refactor all of this testing stuff
 void button1Pressed(){
@@ -54,10 +54,14 @@ void setup() {
   Serial.begin(115200); // Any baud rate should work
   // Serial.println("Hello Arduino\n");
 
-  pinMode(A0, INPUT_PULLUP);
+  for (int i=0; i<5; i++){
+    pinMode(buttons[i], INPUT_PULLUP);
+  }
+  /* pinMode(A0, INPUT_PULLUP);
   pinMode(A1, INPUT_PULLUP);
   pinMode(A2, INPUT_PULLUP);
   pinMode(A3, INPUT_PULLUP);
+  */
 
   Serial.println("Start up!");
   before = millis();
